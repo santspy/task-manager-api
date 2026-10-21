@@ -34,5 +34,5 @@ if you want to quickly spin up the environment for development or testing:
 
 1. clone the repository and navigate to the root directory:
    ```bash
-   git clone [https://github.com/santspy/task-manager-api.git](https://github.com/santspy/task-manager-api.git)
+   git clone https://github.com/santspy/task-manager-api.git
    cd task-manager-api
