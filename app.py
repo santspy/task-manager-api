@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 import os
+import bcrypt
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -26,8 +26,7 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# Utilitários de Criptografia
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Utilitários de Autenticação
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
@@ -77,13 +76,18 @@ class Token(BaseModel):
   token_type: str
 
 
-# --- FUNÇÕES AUXILIARES ---
-def verify_password(plain_password, hashed_password):
-  return pwd_context.verify(plain_password, hashed_password)
+# --- FUNÇÕES AUXILIARES (Bcrypt Direto) ---
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+  return bcrypt.checkpw(
+      plain_password.encode("utf-8"), hashed_password.encode("utf-8")
+  )
 
 
-def get_password_hash(password):
-  return pwd_context.hash(password)
+def get_password_hash(password: str) -> str:
+  pwd_bytes = password.encode("utf-8")
+  salt = bcrypt.gensalt()
+  hashed = bcrypt.hashpw(pwd_bytes, salt)
+  return hashed.decode("utf-8")
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
@@ -164,7 +168,9 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 @app.post("/tasks/", status_code=201)
-def create_task(task: TaskCreate, current_user: UserModel = Depends(get_current_user)):
+def create_task(
+    task: TaskCreate, current_user: UserModel = Depends(get_current_user)
+):
   db = SessionLocal()
   db_task = TaskModel(
       title=task.title, description=task.description, user_id=current_user.id

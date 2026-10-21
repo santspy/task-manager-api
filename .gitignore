@@ -1,14 +1,16 @@
-# python
-__pycache__/
-*.py[cod]
-*$py.class
+# ambientes virtuais
 .venv/
 venv/
-ENV/
+env/
 
-# ambiente e chaves
+# pytest e cache do python
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# BD Local (se for usar SQLite para os testes)
+*.db
+*.sqlite3
+
+# variáveis de ambiente secretas
 .env
-
-# docker e IDE
-.idea/
-.vscode/
