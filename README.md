@@ -222,7 +222,6 @@ docker compose down
 
 | Method | Endpoint | Description | Requires Auth? |
 
-| :--- | :--- | :--- | :---: |
 
 | GET | / | Welcome root message | No |
 
