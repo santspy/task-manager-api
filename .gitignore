@@ -1,0 +1,14 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# ambiente e chaves
+.env
+
+# docker e IDE
+.idea/
+.vscode/
