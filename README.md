@@ -2,7 +2,7 @@
 
 
 
-A professional, production-ready RESTful API built with FastAPI, SQLAlchemy, and PostgreSQL, featuring JWT (JSON Web Tokens) authentication and an automated testing suite using pytest.
+A backend REST API built with FastAPI, PostgreSQL and SQLAlchemy, featuring JWT authentication, automated tests, Docker and Kubernetes configuration.
 
 
 
