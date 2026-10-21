@@ -1,38 +1,247 @@
-# task manager API - secured & containerized
+#Task Manager API
 
-welcome! This repository contains a production-ready **task manager API** built with **fastAPI** and **postgreSQL**. 
 
-the goal of this project was to go beyond a simple CRUD application by implementing secure JWT authentication, strict user data isolation, and taking the application through the full DevOps lifecycle—from local multi-container development with Docker to orchestration on a local **Kubernetes** cluster.
 
----
+A professional, production-ready RESTful API built with FastAPI, SQLAlchemy, and PostgreSQL, featuring JWT (JSON Web Tokens) authentication and an automated testing suite using pytest.
 
-## tech stack & key tools
 
-* **backend**: python 3.10+, fastAPI, pydantic v2
-* **database & ORM**: postgreSQL, SQLAlchemy 2.0
-* **security & auth**: JSON Web tokens (JWT via `python-jose`), Passlib & Bcrypt (password hashing)
-* **DevOps & infrastructure**: docker, docker dompose, kubernetes (`deployment`, `service`, `nodePort`)
 
 ---
 
-## architecture & security highlights
 
-building a secure backend was at the core of this project. Here are a few key architectural choices:
 
-1. **stateless JWT Authentication**: protected endpoints require a valid Bearer token provided upon login.
-2. **password security**: passwords are never stored in plain text. They are hashed using `bcrypt` before hitting the database.
-3. **data isolation by design**: Tasks are strictly tied to the authenticated user (`user_id` foreign Key), ensuring users can only read and manage their own data.
-4. **resilient kubernetes deployment**: separate deployments and services for both the fastAPI application and postgreSQL database ensure decoupled scaling and lifecycle management.
+##Tech Stack
+
+
+
+* Language: Python 3.11+
+
+* Framework: FastAPI (https://fastapi.tiangolo.com/)
+
+* ORM: SQLAlchemy (https://www.sqlalchemy.org/)
+
+* Database: PostgreSQL
+
+* Authentication: JWT (python-jose) + Hashing via bcrypt
+
+* Automated Testing: pytest & httpx
+
+* Containerization: Docker & Docker Compose
+
+
 
 ---
 
-### how to run the project
 
-### option 1: quick start with docker compose (local development)
 
-if you want to quickly spin up the environment for development or testing:
+##Repository Structure
 
-1. clone the repository and navigate to the root directory:
-   ```bash
-   git clone https://github.com/santspy/task-manager-api.git
-   cd task-manager-api
+
+
+task-manager-api/
+
+├── app.py              # Application entry point (routes, models, auth)
+
+├── requirements.txt    # Project dependencies
+
+├── .gitignore          # Git exclusion rules
+
+├── tests/
+
+│   └── test_api.py     # Automated unit & integration tests
+
+└── README.md           # Project documentation
+
+
+
+---
+
+
+
+##Getting Started (Local Setup)
+
+
+
+###Prerequisites
+
+
+
+* Python 3.11 or higher
+
+* A running instance of PostgreSQL (local or cloud)
+
+
+
+###1. Clone the Repository
+
+
+
+git clone https://github.com/santspy/task-manager-api.git
+
+cd task-manager-api
+
+
+
+###2. Set Up a Virtual Environment
+
+
+
+* Windows (PowerShell):
+
+  python -m venv .venv
+
+  .\.venv\Scripts\Activate.ps1
+
+
+
+* Linux / macOS:
+
+  python3 -m venv .venv
+
+  source .venv/bin/activate
+
+
+
+###3. Install Dependencies
+
+
+
+pip install --upgrade pip
+
+pip install --only-binary=:all: --prefer-binary -r requirements.txt
+
+
+
+###4. Configure Environment Variables (Optional)
+
+
+
+By default, the application connects to a local PostgreSQL database at localhost:5432 with user postgres and password postgres. Override these defaults by setting environment variables:
+
+
+
+export DB_USER=your_user
+
+export DB_PASSWORD=your_password
+
+export DB_HOST=localhost
+
+export DB_NAME=tasks_db
+
+
+
+###5. Run the Development Server
+
+
+
+uvicorn app:app --reload
+
+
+
+Access the interactive API documentation in your browser:
+
+* Swagger UI: http://127.0.0.1:8000/docs
+
+* ReDoc: http://127.0.0.1:8000/redoc
+
+
+
+---
+
+
+
+##Running Automated Tests
+
+
+
+The test suite uses pytest to validate authentication workflows and API endpoints.
+
+
+
+Ensure your virtual environment is active, then run:
+
+
+
+* Windows (PowerShell):
+
+  $env:PYTHONPATH="."
+
+  pytest -v
+
+
+
+* Linux / macOS:
+
+  PYTHONPATH=. pytest -v
+
+
+
+---
+
+
+
+##Running with Docker (Optional)
+
+
+
+To spin up both the API and the PostgreSQL database in isolated containers:
+
+
+
+### 1. Start the Containers
+
+
+
+docker compose up -d --build
+
+
+
+### 2. View Application Logs
+
+
+
+docker compose logs -f
+
+
+
+### 3. Stop the Containers
+
+
+
+docker compose down
+
+
+
+---
+
+
+
+##Key API Endpoints
+
+
+
+| Method | Endpoint | Description | Requires Auth? |
+
+| :--- | :--- | :--- | :---: |
+
+| GET | / | Welcome root message | No |
+
+| POST | /register | Register a new user | No |
+
+| POST | /token | Authenticate and obtain JWT Bearer Token | No |
+
+| POST | /tasks/ | Create a new task | Yes |
+
+| GET | /tasks/ | Retrieve tasks owned by current user | Yes |
+
+
+
+---
+
+
+
+##License
+
+
+
+This project is licensed under the MIT License. Feel free to use and contribute!
