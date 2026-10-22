@@ -1,3 +1,13 @@
+<img width="503" height="444" alt="{4DB64C1A-F9DD-4102-9248-1C7C11CFDA05}" src="https://github.com/user-attachments/assets/9015ad04-09bb-4a51-879a-e8278386b3e8" />
+<img width="503" height="444" alt="{0067298E-FD8F-470B-AC33-A186F688960A}" src="https://github.com/user-attachments/assets/3d2397d8-746a-480f-a3a9-8c74e18072e0" />
+<img width="1920" height="950" alt="{8ACFD479-92C5-4396-B983-6555ABB4A1C4}" src="https://github.com/user-attachments/assets/9559f7cf-5f62-4cb9-9d6f-d175f626f722" />
+<img width="1024" height="169" alt="{4AD1141A-9680-46BC-BD31-15BFC022F6B1}" src="https://github.com/user-attachments/assets/747a4fbc-d206-4b2f-bfcb-22f2d01ac156" />
+<img width="1024" height="169" alt="{2CD02CD1-67AE-4EC6-9769-F3D8B5E5C104}" src="https://github.com/user-attachments/assets/17d5bbc7-a6f3-4e16-aaeb-cb271a74e33a" />
+<img width="1024" height="169" alt="{2943329A-E0BF-418F-B7ED-FFE38AB57F81}" src="https://github.com/user-attachments/assets/6312a5f6-277c-41a1-a66d-98fc9b3450bb" />
+<img width="1381" height="253" alt="{7BC0751E-8ED8-43B2-9A43-51B854ECEE1F}" src="https://github.com/user-attachments/assets/a679cc67-95c7-43d7-9448-408e88eb53d8" />
+
+
+
 #Task Manager API
 
 
